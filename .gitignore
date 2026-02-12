@@ -15,3 +15,9 @@ override.tf.json
 # Certificados 
 /certs
 
+# Logs 
+/logs
+
+# Dados persistentes
+grafana/
+loki/data/

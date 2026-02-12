@@ -162,4 +162,4 @@ Próximos passos para elevar a maturidade da infraestrutura:
 ### 🧾 Conclusão
 Este projeto demonstra a aplicação prática de conceitos de **DevOps, SRE e Observabilidade**, indo além da instrumentação básica e abordando aspectos essenciais de operação, diagnóstico e escalabilidade.
 
-A solução foi desenhada para refletir cenários reais de produção, mantendo flexibilidade para evolução contínua e garantindo que o **Jimi IoT Gateway** opere com alta visibilidade e resiliência.
+A solução foi desenhada para refletir cenários reais de produção, mantendo flexibilidade para evolução contínua e garantindo que o **IoTHub Gateway** opere com alta visibilidade e resiliência.

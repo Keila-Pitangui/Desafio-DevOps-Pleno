@@ -1,0 +1,11 @@
+
+global:
+  scrape_interval: 15s # Scrape a cada 15s
+
+scrape_configs:
+  - job_name: 'iothub-stack'
+    static_configs:
+      - targets: ['webhook:7000'] 
+
+rule_files:
+  - "alert_rules.yml"

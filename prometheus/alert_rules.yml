@@ -1,0 +1,28 @@
+groups:
+  - name: jimi_alerts
+    rules:
+      - alert: AltaTaxaDeErro
+        expr: (sum(rate(jimi_http_errors_total[5m])) / sum(rate(jimi_webhooks_received_total[5m]))) > 0.05
+        for: 1m
+        annotations:
+          summary: "Alta taxa de erro no Webhook ({{ $value | humanizePercentage }})"
+          description: "A taxa de erro HTTP 400 superou 5% nos últimos 5 minutos."
+      # Serviço Fora do Ar (Disponibilidade)
+      - alert: ServicoWebhookDown
+        expr: up{job="iothub-stack"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instância do Webhook está fora do ar"
+          description: "O Prometheus não consegue coletar métricas do container webhook há mais de 1 minuto."
+
+      # Latência Alta (Performance)
+      - alert: LatenciaAlta
+        expr: (rate(jimi_request_latency_ms_sum[5m]) / rate(jimi_request_latency_ms_count[5m])) > 500
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Latência média acima de 500ms"
+          description: "O tempo de resposta do webhook está lento nos últimos 5 minutos."

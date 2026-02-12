@@ -1,4 +1,4 @@
-# Jimi IoT Gateway — Observability Platform
+# IoTHub Gateway — Observability Platform
 
 ## Contexto do Desafio
 

@@ -81,6 +81,7 @@ sudo setsebool -P container_manage_cgroup on
 
 Inicialização
 docker compose up -d
+```
 
 Acessos
 Serviço	URL
@@ -119,13 +120,15 @@ O dashboard entregue (**`grafana-dashboard-jimi-iot.json`**) foi construído com
 ### Checklist Operacional
 
 - **Verificação de containers**
-  ```bash
+```bash
   docker ps
+```
 
 ### 📜 Logs do Promtail
 Para verificar o status da coleta de logs e a comunicação com o Docker Socket:
 ```bash
 docker logs promtail
+```
 
 ### 💾 Validação de Volumes Persistentes
 Garante a retenção mínima de 7 dias para métricas e logs:

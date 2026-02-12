@@ -1,0 +1,32 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: docker_logs
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock # L1: Coleta via socket
+        refresh_interval: 5s
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/(nginx|webhook)'
+        target_label: 'container'
+    pipeline_stages:
+      - json: # L2 e L3: Extrair campos do JSON do código Python
+          expressions:
+            timestamp: timestamp
+            level: level
+            message: msg
+            device_id: device_id # Contexto
+      - timestamp:
+          source: timestamp
+          format: RFC3339
+      - labels:
+          level:
+          device_id:

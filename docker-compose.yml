@@ -5,6 +5,11 @@ services:
   # blocos que foram inseridos (nginx, prometheus, grafana, loki)
   nginx:
     image: nginx:stable-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     container_name: nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
@@ -93,6 +98,9 @@ services:
   # Bloco - Webhook
   webhook:
     build: .
+    depends_on:
+      nginx:
+        condition: service_healthy
     container_name: webhook
     deploy:
       resources:
